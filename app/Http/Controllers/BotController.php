@@ -58,7 +58,8 @@ class BotController extends Controller
         try {
             $containFillerWords = [];
 
-            //Package to use the sentiment of sentence used davmixcool/php-sentiment-analyzer
+            //Package to use the sentiment of sentence used davmixcool/php-sentiment-analyzerow
+            //Result are some how matching on https://text2data.com/Demo but it depends on ML what is running behind it.
             $analyzer = new Analyzer();
             $fillerWords = config('constant.fillerWords');
 
@@ -66,7 +67,6 @@ class BotController extends Controller
 
                 //function of package to get sentiment of sentence it'll return an array of neg. pos, neu values
                 $checkSentiment = $analyzer->getSentiment($review->review);
-
                 //Checked if sentence is postive (as we need to focus in postive reviews).
                 //Checked rating is 5 starts  
                 //last condition if the words contain filler words
