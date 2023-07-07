@@ -14,6 +14,8 @@ class BotController extends Controller
     {
         try {
             $fakeReviews = [];
+
+            //get reviews user wise
             $groupedReviews = Review::get()->groupBy('user_id');
 
             foreach ($groupedReviews as $userId => $groupReview) {
@@ -23,9 +25,9 @@ class BotController extends Controller
                 if (count($this->checkReviewsContainFillerWords($groupReview)))
                     $fakeReviews['filler_words'][] = $this->checkReviewsContainFillerWords($groupReview);
             }
-            return $fakeReviews;
+            return success('Success', $fakeReviews);
         } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
+            return error('Something went wrong');
         }
     }
 
@@ -40,7 +42,7 @@ class BotController extends Controller
             $duplicates = $reviews->diff($uniqueReviews);
             //Check if the duplication occur more then 2 (we can use any number here)
             if ($duplicates->count() > 2)
-                $duplicateReviews[] = $reviews->map(function ($review) {
+                $duplicateReviews[] = $duplicates->map(function ($review) {
                     $review['is_fake'] = 1;
                     $review['reason'] = 'User reviewed with same review';
                     return $review;
@@ -61,6 +63,7 @@ class BotController extends Controller
             $fillerWords = config('constant.fillerWords');
 
             foreach ($reviews as $review) {
+
                 //function of package to get sentiment of sentence it'll return an array of neg. pos, neu values
                 $checkSentiment = $analyzer->getSentiment($review->review);
 

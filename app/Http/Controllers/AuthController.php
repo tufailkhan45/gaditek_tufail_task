@@ -21,7 +21,7 @@ class AuthController extends Controller
             ]);
 
             if ($validator->fails()) {
-                //return validation errror
+                return unprocessableEntity($validator->errors()->first());
             }
 
             $user = new User();
@@ -29,10 +29,10 @@ class AuthController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->save();
-            $token = $user->createToken('API Access Token')->plainTextToken;
-            return ['success' => 'User created successfully', 'token' => $token];
+            $user->token = $user->createToken('API Access Token')->plainTextToken;
+            return success('User registered successfully', $user);
         } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
+            return error('Something went wrong');
         }
     }
 
@@ -40,22 +40,22 @@ class AuthController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|confirmed|min:6',
+                'email' => 'required|email',
+                'password' => 'required',
             ]);
 
             if ($validator->fails()) {
-                //return validation errror
+                return unprocessableEntity($validator->errors()->first());
             }
 
             if (!Auth::attempt($request->only(['email', 'password']))) {
                 return ['error' => 'invalid'];
             } else {
                 $token = auth()->user()->createToken('API Access Token')->plainTextToken;
-                return ['success' => 'User created successfully', 'token' => $token];
+                return success('Credentials matched', $token);
             }
         } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
+            return error('Something went wrong');
         }
     }
 }

@@ -19,7 +19,7 @@ class ReviewController extends Controller
             ]);
 
             if ($validator->fails()) {
-                //return validation errror
+                return unprocessableEntity($validator->errors()->first());
             }
 
             $review = new Review();
@@ -29,9 +29,9 @@ class ReviewController extends Controller
             $review->review = $request->review;
             $review->save();
 
-            return ['success' => 'Successfully'];
+            return success('Thank you for your feedback');
         } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
+            return error('Something went wrong');
         }
     }
 }
