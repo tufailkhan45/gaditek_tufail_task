@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Sentiment\Analyzer;
 
 class BotController extends Controller
 {
@@ -20,7 +21,7 @@ class BotController extends Controller
                     $fakeReviews['duplicate_reviews'] = $this->getDuplicateReviews($groupReview);
 
                 if (count($this->checkReviewsContainFillerWords($groupReview)))
-                $fakeReviews['filler_words'][] = $this->checkReviewsContainFillerWords($groupReview);
+                    $fakeReviews['filler_words'][] = $this->checkReviewsContainFillerWords($groupReview);
             }
             return $fakeReviews;
         } catch (\Exception $e) {
@@ -54,9 +55,19 @@ class BotController extends Controller
     {
         try {
             $containFillerWords = [];
+
+            //Package to use the sentiment of sentence used davmixcool/php-sentiment-analyzer
+            $analyzer = new Analyzer();
             $fillerWords = config('constant.fillerWords');
+
             foreach ($reviews as $review) {
-                if (Str::contains($review->review, $fillerWords)) {
+                //function of package to get sentiment of sentence it'll return an array of neg. pos, neu values
+                $checkSentiment = $analyzer->getSentiment($review->review);
+
+                //Checked if sentence is postive (as we need to focus in postive reviews).
+                //Checked rating is 5 starts  
+                //last condition if the words contain filler words
+                if (round($checkSentiment['pos']) && $review->rating == 5 && Str::contains($review->review, $fillerWords)) {
                     $review['is_fake'] = 1;
                     $review['reason'] = 'Review contains filler words';
                     $containFillerWords[] = $review;

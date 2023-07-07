@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "cd18471e5a42960c2f0b231eef2dc4f3",
     "packages": [
         {
             "name": "brick/math",
@@ -60,6 +60,57 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "davmixcool/php-sentiment-analyzer",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davmixcool/php-sentiment-analyzer.git",
+                "reference": "d7503b68313c62eee3ed0ac9774c0a84d818a405"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davmixcool/php-sentiment-analyzer/zipball/d7503b68313c62eee3ed0ac9774c0a84d818a405",
+                "reference": "d7503b68313c62eee3ed0ac9774c0a84d818a405",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sentiment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Oti",
+                    "email": "davmixcool@gmail.com",
+                    "role": "Software Developer"
+                }
+            ],
+            "description": "PHP Sentiment Analyzer is a lexicon and rule-based sentiment analysis tool that is used to understand sentiments in a sentence using VADER (Valence Aware Dictionary and sentiment Reasoner).",
+            "homepage": "https://github.com/davmixcool/php-sentiment-analyzer",
+            "keywords": [
+                "Deep learning",
+                "Sentiment Analyzer",
+                "ai",
+                "machine learning",
+                "nlp",
+                "php",
+                "social"
+            ],
+            "support": {
+                "issues": "https://github.com/davmixcool/php-sentiment-analyzer/issues",
+                "source": "https://github.com/davmixcool/php-sentiment-analyzer/tree/1.2.2"
+            },
+            "time": "2020-09-17T13:50:06+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -7568,16 +7619,16 @@
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a"
+                "reference": "943894c6a6b00501365ac0b91ae0dce56f2226fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
-                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/943894c6a6b00501365ac0b91ae0dce56f2226fa",
+                "reference": "943894c6a6b00501365ac0b91ae0dce56f2226fa",
                 "shasum": ""
             },
             "require": {
@@ -7626,7 +7677,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.4.0"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.4.1"
             },
             "funding": [
                 {
@@ -7634,7 +7685,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-28T11:08:09+00:00"
+            "time": "2023-07-06T09:29:49+00:00"
         },
         {
             "name": "spatie/ignition",
